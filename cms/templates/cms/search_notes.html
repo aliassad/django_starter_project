@@ -1,0 +1,59 @@
+{% extends 'mynotes/base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <form method="get" action="{% url  'search_notes' %}">
+                <div class="col-auto">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="q" value="{{ request.GET.q }}" id="q"
+                               placeholder="Search by keywords">
+                        <label><input type="checkbox" name="match_book_title"
+
+                                {% if  request.GET.q is None %} checked {% endif %}
+                                {% if  request.GET.match_book_title %} checked {% endif %}
+                        /> Also Match Note Book
+                            title</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% if request.GET.q %}
+        {% if request.GET.match_book_title %}
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="border-bottom mb-4">Note Books</h3>
+                </div>
+            </div>
+        {% endif %}
+        <div class="row">
+            {% if note_books.count != 0 %}
+                {% for note_book in note_books %}
+                    {% include 'mynotes/templates/note-book.html' %}
+                {% endfor %}
+            {% else %}
+                <div class="col-12">
+                    <p>No Notes to display!</p>
+                </div>
+            {% endif %}
+        </div>
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="border-bottom mb-4">Notes
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            {% if notes.count != 0 %}
+                {% for note in notes %}
+                    {% include 'mynotes/templates/note.html' %}
+                {% endfor %}
+            {% else %}
+                <div class="col-12">
+                    <p>No Notes to display!</p>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock content %}

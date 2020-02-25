@@ -1,0 +1,25 @@
+{% extends 'cms/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section shadow rounded">
+        <div class="media ">
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        </div>
+
+        <p class="text-secondary"><strong>{{ user.username }}</strong><br>{{ user.email }}</p>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+
+                <legend class="border-bottom mb-4">Update Profile Details&nbsp;<a href="{% url 'password_change' %}" class="btn-sm btn-primary pull-right">Change Password</a></legend>
+                {{ form_user|crispy }}
+                {{ form_profile }}
+            </fieldset>
+
+            <div class="form-group">
+                <button class="btn btn-outline-success" type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'mynotes/base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h3 class="border-bottom mb-4">All Public Note Books</h3>
+        </div>
+    </div>
+    {% if note_books.count != 0 %}
+        <div class="row">
+            {% for note_book in note_books %}
+        {% include 'mynotes/templates/public-note-book.html' %}
+            {% endfor %}
+        </div>
+        {% include 'mynotes/pagination_template.html' %}
+    {% else %}
+        <div class="col-12">
+            <p>No Notes to display!</p>
+        </div>
+    {% endif %}
+
+
+{% endblock content %}

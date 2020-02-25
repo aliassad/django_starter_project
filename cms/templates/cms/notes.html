@@ -1,0 +1,33 @@
+{% extends 'mynotes/base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h3 class="border-bottom mb-4">{{ note_book.title }} - Notes
+                <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary border-bottom mb-4 float-right">
+                    Back</a></h3>
+        </div>
+    </div>
+    {% if notes.count != 0 %}
+        <div class="row">
+            {% for note in notes %}
+                {% include 'mynotes/templates/note.html' %}
+            {% endfor %}
+        </div>
+        {% include 'mynotes/pagination_template.html' %}
+    {% else %}
+        <div class="col-12">
+            <p>No Notes Added Yet! <a href="{% url 'note_create' note_book.pk %}" class="btn btn-success">Add
+                Note</a>
+            </p>
+        </div>
+    {% endif %}
+    <div class="pmd-floating-action" role="navigation">
+        <a href="{% url 'note_create' note_book.pk %}"
+           class="pmd-floating-action-btn btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-success"
+           data-title="Add New Note">
+            <span class="pmd-floating-hidden">Primary</span>
+            <i class="material-icons pmd-sm">add</i>
+        </a>
+    </div>
+{% endblock content %}

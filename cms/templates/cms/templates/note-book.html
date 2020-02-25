@@ -1,0 +1,28 @@
+<div class="col-6 col-md-3">
+    <div class="card mb-2 shadow note-card">
+        <div class="media notebook-img-block">
+            <img alt="note-book-thumbnail" class="card-img-top  notebook-img"
+                 src="{% if note_book.thumbnail_url %}{{ note_book.thumbnail_url }}{% else %}{{ note_book.thumbnail.url }}{% endif %}">
+
+        </div>
+        <div class="card-body">
+            <div class="card-badges">
+                {% if note_book.is_favorite %}
+                    <img alt="note-favorite"
+                         src="/media/star_fill.png" class="favorite-icon-star">
+                {% endif %}
+                {% if note_book.is_public %}
+                    <img alt="note-public"
+                         src="/media/global.png" class="favorite-icon-public">
+                {% endif %}
+            </div>
+            <h6 class="card-title">{{ note_book.title }}</h6>
+            <div class="card-buttons">
+                <a href="{% url 'note_book_notes' note_book.id %}"
+                   class="btn-sm btn-primary mb-1">Notes</a>
+                <a href="{% url 'note_book_update' note_book.id %}"
+                   class="btn-sm btn-secondary">Edit</a>
+            </div>
+        </div>
+    </div>
+</div>

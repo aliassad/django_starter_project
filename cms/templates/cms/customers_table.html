@@ -1,0 +1,61 @@
+{% extends 'cms/base.html' %}
+{% block content %}
+    {% if request.user.is_superuser %}
+    <div class="row">
+        <a class="btn btn-info pull-right" href="{% url 'export_users_xls' %}">Export all Customers</a>
+        <a style="margin-left: 10px;" class="btn btn-success pull-right" href="{% url 'export_new_users_xls' %}">Export all New Patients</a>
+    </div>
+    {% endif %}
+
+    <div class="row card " style="margin-top: 10px">
+        <h1 class="text-center">Customers</h1>
+        <br/>
+        <div class="col-sm-12">
+            <div class="col-sm-4">
+                <form action="{% url 'cms_customers' %}" method="get">
+                    <input value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" class="form-control" name="q" type="text" placeholder="Search...">
+                </form>
+            </div>
+        </div>
+    <br>
+        {% if customers.count %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Referral</th>
+                    <th scope="col">Visits</th>
+                    <th scope="col">First Visit Date</th>
+                    <th scope="col">Recent Visit Date</th>
+                    <th scope="col">Banned</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for customer in customers %}
+                    <tr>
+                        <th scope="row">{{ customer.id }} : {{ customer.customer_id }}</th>
+                        <td>{{ customer.first_name }} {{ customer.last_name }}</td>
+                        <td>{{ customer.phone }}</td>
+                        <td>{{ customer.email }}</td>
+                        <td>{{ customer.referral_source }}</td>
+                        <td>{{ customer.visits }}</td>
+                        <td>{{ customer.created_at }}</td>
+                        <td>{{ customer.updated_at }}</td>
+                        <td>{{ customer.banned }}</td>
+                        <td><a href="{% url 'edit_visit_page' customer.pk %}" class="btn btn-info">Add Visit</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+    </div>
+
+
+
+    {% include 'cms/pagination_template.html' %}
+{% endblock content %}
