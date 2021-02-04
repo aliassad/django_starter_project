@@ -98,10 +98,10 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'database_name',
-            'USER': 'cms_admin',
-            'PASSWORD': 'aliassad110',
-            'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
+            'NAME': 'django_starter_db',
+            'USER': 'root',
+            'PASSWORD': '',
+            'HOST': '127.0.0.1',  # Or an IP Address that your DB is hosted on
             'PORT': '3306',
         }
     }
