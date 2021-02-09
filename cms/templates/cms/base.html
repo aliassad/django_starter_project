@@ -34,7 +34,7 @@
                         <a class="nav-item nav-link" href="{% url 'logout' %}">Log out</a>
                     {% else %}
                         <a class="nav-item nav-link {% if request.resolver_match.url_name == "login" %}active{% endif %}" href="{% url 'login' %}">Log In</a>
-{#                        <a class="nav-item nav-link {% if request.resolver_match.url_name == "register" %}active{% endif %}" href="{% url 'register' %}">Register</a>#}
+                        <a class="nav-item nav-link {% if request.resolver_match.url_name == "register" %}active{% endif %}" href="{% url 'register' %}">Register</a>
                     {% endif %}
                 </div>
             </div>
@@ -44,12 +44,9 @@
         <ul class="nav justify-content-center bg-white p-2 small-nav">
             <li class="nav-item ">
                 <a class="nav-link {% if request.resolver_match.url_name == "cms_dashboard" or request.resolver_match.url_name == "cms_main_page" %}shadow-sm  active{% endif %}" href="{% url 'cms_dashboard' %}">Dashboard</a>
-            </li>
+            </li>    
             <li class="nav-item ">
-                <a class="nav-item nav-link {% if request.resolver_match.url_name == "cms_customers" %}shadow-sm  active{% endif %}" href="{% url 'cms_customers' %}">Customer Book</a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-item nav-link {% if request.resolver_match.url_name == "add_visit_page" %}shadow-sm  active{% endif %}" href="{% url 'add_visit_page' %}">Add New Visit</a>
+                <a class="nav-link {% if request.resolver_match.url_name == "profile" or request.resolver_match.url_name == "profile" %}shadow-sm  active{% endif %}" href="{% url 'profile' %}">My Profile</a>
             </li>
         </ul>
     {% endif %}
